@@ -38,7 +38,7 @@ ruleTester.run("public-api-imports", rule, {
       options: aliasOptions,
     },
     {
-      filename: 'C:\\Users\\tim\\Desktop\\javascript\\production_project\\src\\entities\\file.test.ts',
+      filename: 'C:\\Users\\misha\\Desktop\\javascript\\production_project\\src\\entities\\file.test.ts',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/testing'",
       errors: [],
       options: [{
@@ -47,7 +47,7 @@ ruleTester.run("public-api-imports", rule, {
       }],
     },
     {
-      filename: 'C:\\Users\\tim\\Desktop\\javascript\\production_project\\src\\entities\\StoreDecorator.tsx',
+      filename: 'C:\\Users\\misha\\Desktop\\javascript\\production_project\\src\\entities\\StoreDecorator.tsx',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/testing'",
       errors: [],
       options: [{
@@ -60,25 +60,27 @@ ruleTester.run("public-api-imports", rule, {
   invalid: [
     {
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/model/file.ts'",
-      errors: [{ message: 'Absolute imports are acceptable only from public api (index.ts)'}],
+      errors: [{messageId: 'PUBLIC_ERROR'}],
       options: aliasOptions,
+      output: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article'",
     },
     {
-      filename: 'C:\\Users\\tim\\Desktop\\javascript\\production_project\\src\\entities\\StoreDecorator.tsx',
+      filename: 'C:\\Users\\misha\\Desktop\\javascript\\production_project\\src\\entities\\StoreDecorator.tsx',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/testing/file.tsx'",
-      errors: [{message: 'Absolute imports are acceptable only from public api (index.ts)'}],
+      errors: [{messageId: 'PUBLIC_ERROR'}],
+      output: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article'",
       options: [{
         alias: '@',
-        testFilesPatterns: ['**/*.test.ts', '**/*.test.ts', '**/StoreDecorator.tsx']
+        testFilesPatterns: ['**/*.testing.ts', '**/*.test.ts', '**/*.stories.ts', '**/StoreDecorator.tsx']
       }],
     },
     {
-      filename: 'C:\\Users\\tim\\Desktop\\javascript\\production_project\\src\\entities\\forbidden.ts',
+      filename: 'C:\\Users\\misha\\Desktop\\javascript\\production_project\\src\\entities\\forbidden.ts',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/testing'",
-      errors: [{message: 'Testing data should be imported from publicApi/testing.ts'}],
+      errors: [{messageId: 'TESTING_PUBLIC_ERROR'}],
       options: [{
         alias: '@',
-        testFilesPatterns: ['**/*.test.ts', '**/*.test.ts', '**/StoreDecorator.tsx']
+        testFilesPatterns: ['**/*.testing.ts', '**/*.test.ts', '**/*.stories.ts', '**/StoreDecorator.tsx']
       }],
     }
   ],
