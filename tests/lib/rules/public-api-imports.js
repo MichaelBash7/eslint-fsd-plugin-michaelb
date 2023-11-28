@@ -75,7 +75,7 @@ ruleTester.run("public-api-imports", rule, {
     {
       filename: 'C:\\Users\\tim\\Desktop\\javascript\\production_project\\src\\entities\\forbidden.ts',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/testing'",
-      errors: [{message: 'Test data should be imported from publicApi/testing.ts'}],
+      errors: [{message: 'Testing data should be imported from publicApi/testing.ts'}],
       options: [{
         alias: '@',
         testFilesPatterns: ['**/*.test.ts', '**/*.test.ts', '**/StoreDecorator.tsx']
